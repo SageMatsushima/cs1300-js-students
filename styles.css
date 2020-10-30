@@ -1,0 +1,9 @@
+#all {
+	flex-wrap: wrap;
+}
+
+#plants {
+	width: 15vw;
+	height: 15vw;
+	background-color: aquamarine;
+}
