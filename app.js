@@ -1,4 +1,4 @@
-var corsApiUrl = "https://cors-anywhere.herokuapp.com/";
+  var corsApiUrl = "https://cors-anywhere.herokuapp.com/";
 // TODO: REPLACE YOUR TOKEN
 var apiToken = "?token=OGUrBXITv_iRdDDbbm0cRb1-_5HEDOhzEERbfw9G0ho";
 
@@ -30,60 +30,63 @@ corsPromise().then(
 );
 
 const handleResponse = (response) =>{
-  const data = JSON.parse(response).data;
-  const yr = data.filter(PLANT => {return PLANT_DISCOVERED_AFTER_YEAR_1753; })
-  document.write(data);
+  const data = JSON.parse(response);
+  const plants = data.data;
+
+plants.forEach(element => {
+  displayPlant(element.common_name, element.image_url);
+});
+
+  // const yr = data.filter(PLANT => {return PLANT_DISCOVERED_AFTER_YEAR_1753; })
+  // document.write(data);
 }
 
 
 
 
 
-// const getData = (response) => {
+const displayPlant = (common_name, image_url) => {
 //   const plantData = JSON.parse(response).data;
 
 //   const list = console.log(plantData.filter(item => item.year >= 1700))
 
-//   var i;
-//   for (i = 0; i < list.length; i++){
-//     addToDom(i)
-//   }
+//   list.appendChild(console.log(plantData));
 
-//   // console.log(plantData);
-//   // console.log(plantData[0]);
-//   // console.log(plantData[0].common_name);
-
-//   // addToDom(plantData[0]);
+//   addToDom(plantData[0]);
 //   // addToDom(plantData[1]);
 // }
 
-const addToDom = (plant) =>{
+// const addToDom = (plant) =>{
   const wrapperDiv = document.createElement('div');
-  wrapperDiv.setAttribute("class", plant.common_name)
+  wrapperDiv.setAttribute("id", "wrapper");
 
   const plant_name = document.createElement('h3');
-  plant_name.innerText = plant.common_name;
+  plant_name.innerText = common_name;
 
-  const image_url = plant.image_url;
+  // const image_url = plant.image_url;
   const plant_img = document.createElement('img');
-  plant_img.setAttribute('src', image_url);
+  plant_img.src = image_url;
+  plant_img.height = "300";
+  plant_img.width = "250";
+//   plant_img.setAttribute('src', image_url);
 
   wrapperDiv.appendChild(plant_name);
   wrapperDiv.appendChild(plant_img);
 
-  const div = document.createElement('div');
-  div.setAttribute("class", plantData.year)
+  document.getElementById("plants").appendChild(wrapperDiv);
 
-  div.appendChild(wrapperDiv);
+//   // const div = document.createElement('div');
+//   // div.setAttribute("class", plantData.year)
+
+//   // div.appendChild(wrapperDiv);
 
 }
-
 
 
 //// TODO: ADD WHATEVER FUN CONTENT YOU WANT ////
 
 const displayContent = () => {
   corsPromise().then(request => request.onload = request.onerror = function (){
-    getData(request.response)
+    // getData(request.response)
   });
 }
